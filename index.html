@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Display a map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoicnNlbHZhODUiLCJhIjoiY2lsMG4zeW11MjBqMnZvbTNoMGZlYWlsZiJ9.XIyIFx_7szD7iNqBCJ6zcg';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/rselva85/cjba71hph1t5c2sqg1z0qzz68', // stylesheet location
+    center: [77.5937, 12.9921], // starting position [lng, lat]
+    zoom: 9, // starting zoom
+    hash: true // lat,lng tracker in url
+});
+ // When a click event occurs on a feature in the places layer, open a popup at the
+ // location of the feature, with description HTML from its properties.
+map.on('click', 'karnataka-schools-0ngn0x', function (e) {
+        new mapboxgl.Popup()
+            .setLngLat(e.features[0].geometry.coordinates)
+            .setHTML(e.features[0].properties.name)
+            .addTo(map);
+});
+</script>
+
+</body>
+</html>
